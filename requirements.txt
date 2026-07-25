@@ -1,0 +1,7 @@
+eppy>=0.5.63
+ollama>=0.4.0
+mcp>=1.0.0
+pandas>=2.0.0
+numpy>=1.24.0
+matplotlib>=3.7.0
+plotly>=5.15.0

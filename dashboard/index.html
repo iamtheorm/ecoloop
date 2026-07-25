@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco-Loop | Building Energy Optimization Dashboard</title>
+    <meta name="description" content="AI-driven building energy optimization dashboard showing real-time energy savings and thermal comfort metrics.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-icon">🏢</span>
+                <div>
+                    <h1 class="logo-title">Eco-Loop</h1>
+                    <p class="logo-subtitle">AI Building Energy Optimization</p>
+                </div>
+            </div>
+            <div class="header-badge">
+                <span class="badge badge-live">● LIVE</span>
+                <span class="badge badge-ai">Powered by Qwen 2.5 + MCP</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Metrics -->
+    <section class="hero">
+        <div class="hero-grid">
+            <div class="metric-card metric-primary">
+                <div class="metric-icon">⚡</div>
+                <div class="metric-value" id="energy-saved">—</div>
+                <div class="metric-label">Energy Saved (kWh)</div>
+                <div class="metric-bar">
+                    <div class="metric-bar-fill" id="savings-bar" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="metric-card metric-accent">
+                <div class="metric-icon">📉</div>
+                <div class="metric-value" id="savings-pct">—%</div>
+                <div class="metric-label">Reduction in Energy Use</div>
+                <div class="metric-trend" id="savings-trend">vs. Baseline Schedule</div>
+            </div>
+            <div class="metric-card metric-success">
+                <div class="metric-icon">💰</div>
+                <div class="metric-value" id="cost-savings">$—</div>
+                <div class="metric-label">Estimated Cost Savings</div>
+                <div class="metric-sub">@ $0.12/kWh</div>
+            </div>
+            <div class="metric-card metric-info">
+                <div class="metric-icon">🌡️</div>
+                <div class="metric-value" id="comfort-score">—</div>
+                <div class="metric-label">Comfort Compliance</div>
+                <div class="metric-sub" id="comfort-sub">PMV within ±0.5</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Dashboard Grid -->
+    <main class="dashboard">
+        <!-- Energy Comparison Chart -->
+        <section class="card card-large">
+            <div class="card-header">
+                <h2>Energy Consumption Comparison</h2>
+                <span class="card-badge">Baseline vs AI-Optimized</span>
+            </div>
+            <div class="chart-container">
+                <canvas id="energyChart"></canvas>
+            </div>
+        </section>
+
+        <!-- Temperature Tracking -->
+        <section class="card card-medium">
+            <div class="card-header">
+                <h2>Zone Temperature Tracking</h2>
+                <span class="card-badge">Real-Time</span>
+            </div>
+            <div class="chart-container">
+                <canvas id="tempChart"></canvas>
+            </div>
+        </section>
+
+        <!-- PMV Comfort Chart -->
+        <section class="card card-medium">
+            <div class="card-header">
+                <h2>Thermal Comfort (PMV)</h2>
+                <span class="card-badge">Target: -0.5 to +0.5</span>
+            </div>
+            <div class="chart-container">
+                <canvas id="pmvChart"></canvas>
+            </div>
+        </section>
+
+        <!-- Setpoint History -->
+        <section class="card card-medium">
+            <div class="card-header">
+                <h2>HVAC Setpoint History</h2>
+                <span class="card-badge">Agent Decisions</span>
+            </div>
+            <div class="chart-container">
+                <canvas id="setpointChart"></canvas>
+            </div>
+        </section>
+
+        <!-- Baseline vs Optimized Breakdown -->
+        <section class="card card-medium">
+            <div class="card-header">
+                <h2>Energy Breakdown by Period</h2>
+                <span class="card-badge">Daily kWh</span>
+            </div>
+            <div class="chart-container">
+                <canvas id="breakdownChart"></canvas>
+            </div>
+        </section>
+
+        <!-- Agent Decision Log -->
+        <section class="card card-full">
+            <div class="card-header">
+                <h2>Agent Decision Log</h2>
+                <span class="card-badge" id="decision-count">0 decisions</span>
+            </div>
+            <div class="decision-log" id="decision-log">
+                <div class="decision-empty">Loading simulation data...</div>
+            </div>
+        </section>
+
+        <!-- System Architecture Summary -->
+        <section class="card card-full">
+            <div class="card-header">
+                <h2>System Architecture</h2>
+                <span class="card-badge">Closed-Loop Pipeline</span>
+            </div>
+            <div class="architecture-diagram">
+                <div class="arch-node arch-ep">
+                    <div class="arch-icon">🔧</div>
+                    <div class="arch-title">EnergyPlus</div>
+                    <div class="arch-desc">Building Simulation Engine</div>
+                </div>
+                <div class="arch-arrow">
+                    <span>Sensor Data</span>
+                    <div class="arrow-line">→</div>
+                </div>
+                <div class="arch-node arch-mcp">
+                    <div class="arch-icon">🔌</div>
+                    <div class="arch-title">MCP Server</div>
+                    <div class="arch-desc">9 Tools via FastMCP</div>
+                </div>
+                <div class="arch-arrow">
+                    <span>Tool Calls</span>
+                    <div class="arrow-line">⇄</div>
+                </div>
+                <div class="arch-node arch-llm">
+                    <div class="arch-icon">🧠</div>
+                    <div class="arch-title">Qwen 2.5 (LLM)</div>
+                    <div class="arch-desc">Reasoning + Control</div>
+                </div>
+                <div class="arch-arrow arch-feedback">
+                    <span>Setpoint Overrides</span>
+                    <div class="arrow-line">←</div>
+                </div>
+                <div class="arch-node arch-logger">
+                    <div class="arch-icon">📊</div>
+                    <div class="arch-title">Data Logger</div>
+                    <div class="arch-desc">CSV + JSON Export</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Eco-Loop Building Agent System — Autonomous AI-Driven Energy Optimization</p>
+        <p>Built with EnergyPlus 24.1 • Qwen 2.5 via Ollama • MCP Protocol • Python</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

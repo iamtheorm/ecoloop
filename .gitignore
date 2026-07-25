@@ -1,0 +1,12 @@
+# Environment and dependencies
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# EnergyPlus installation
+energyplus/
+
+# Output and runtime generated files
+output/
+.DS_Store
