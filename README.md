@@ -17,7 +17,7 @@ This repository fulfills all requirements for the Honeywell Physical AI Proof-of
 2. **Building Models**: The base `.idf` and weather files are located in `models/`. Modified versions are generated during runtime.
 3. **Quantitative Savings Dashboard**: A beautiful, responsive visual dashboard (`dashboard/index.html`) fed by live JSON telemetry to prove percentage reductions in kWh while maintaining comfort.
 4. **System Architecture Document**: Detailed in [ARCHITECTURE.md](ARCHITECTURE.md), explaining tool-calling, prompt engineering, latency management, and log handling.
-5. **PoC Demonstration Video**: (Insert your video link here)
+5. **PoC Demonstration Video**: (https://drive.google.com/file/d/1ba_GhTREDXNsAsvRBaF9vwvktbvTXgpp/view?usp=sharing)
 
 ## 🏗 System Architecture
 
